@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Contact
 連絡はこちら
 

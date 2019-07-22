@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Product
 - Castle Vicinity Repel -みをていしてまもる-
   - Mark-on製作

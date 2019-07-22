@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Profile
 - udonba (ウドンバ) / 坂東 光樹
 

@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Resume
 
 ## [東京計器株式会社](https://www.tokyokeiki.jp/)
