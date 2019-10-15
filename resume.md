@@ -3,6 +3,7 @@ layout: default
 ---
 
 # Resume
+仕事や個人の経歴
 
 ## [東京計器株式会社](https://www.tokyokeiki.jp/)
 - 2015/04 ～ 2017/12 (正社員)
@@ -12,13 +13,15 @@ layout: default
   - レール測定データ解析アプリ開発
   - その他
 
-
 ## [株式会社クリーク・アンド・リバー社](https://www.cri.co.jp/)
 - 2018/02 ～ 2018/03 (業務委託)
 - プログラミングアカデミー（VRコース）講師
   - [TECH STADIUM（テック スタジアム）](https://tech-sta.com/)VRコース 第1期講師  
 プレスリリースは[こちら](https://www.cri.co.jp/news/press_release/2019/20190213002646.html)
 
+## [株式会社floorvr](https://floorvr.jp/)
+- 2018/07 ～ 2018/08 (業務委託)
+- VR端末操作システム 改修
 
 ## [Mark-on](http://markon-xr.com/src/index.html)
 - 2017/01 ～
