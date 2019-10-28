@@ -11,6 +11,10 @@ layout: default
 XRコンテンツ・クリエイトチーム「Mark-on」所属プログラマー。  
 Mark-onで様々なVRコンテンツを制作し展示会に出展している。最適化や設計の話題が好き。
 
+- [[Qiita]](https://qiita.com/udo_nba) 
+- [[GitHub]](https://github.com/udonba)
+- [[Mark-on公式]](http://markon-xr.com/src/index.html)
+
 ---
 
 # Skill
@@ -27,7 +31,3 @@ Mark-onで様々なVRコンテンツを制作し展示会に出展している�
 下記メールアドレスか、[Twitter](https://twitter.com/udo_nba)のDMへどうぞ！DMの方が反応速いです  
 udonba@markon-xr.com
 
-### その他
-- [[Qiita]](https://qiita.com/udo_nba) 
-- [[GitHub]](https://github.com/udonba)
-- [[Mark-on公式]](http://markon-xr.com/src/index.html)
