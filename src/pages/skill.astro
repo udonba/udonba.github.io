@@ -1,0 +1,23 @@
+---
+import { getEntry, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
+const page = await getEntry("pages", "skill");
+
+if (!page) {
+  throw new Error("Missing skill page content: src/content/pages/skill.md");
+}
+
+const { Content } = await render(page);
+---
+
+<Layout title={page.data.title} description={page.data.description}>
+  <Header />
+  <main id="main-content" class="app-layout app-prose py-8">
+    <h1>{page.data.title}</h1>
+    <Content />
+  </main>
+  <Footer />
+</Layout>

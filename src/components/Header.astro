@@ -1,0 +1,135 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
+import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
+import IconMoon from "@/assets/icons/IconMoon.svg";
+import IconX from "@/assets/icons/IconX.svg";
+import { stripBase, stripLocale } from "@/utils/withBase";
+import config from "@/config";
+
+const { features } = config;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const relativePath = stripBase(Astro.url.pathname);
+const pathWithoutTrailingSlash =
+  relativePath.endsWith("/") && relativePath !== "/"
+    ? relativePath.slice(0, -1)
+    : relativePath;
+
+const currentPath = stripLocale(pathWithoutTrailingSlash, locale);
+
+const isActive = (path: string) => {
+  const currentPathArray = currentPath.split("/").filter(p => p.trim());
+  const pathArray = path.split("/").filter(p => p.trim());
+  return currentPath === path || currentPathArray[0] === pathArray[0];
+};
+
+const navItems = [
+  { href: "projects", label: "Projects", path: "/projects" },
+  { href: "skill", label: "Skill", path: "/skill" },
+  { href: "resume", label: "Resume", path: "/resume" },
+];
+---
+
+<a
+  id="skip-to-content"
+  href="#main-content"
+  class="bg-background text-accent absolute inset-s-16 -top-full z-50 px-3 py-2 backdrop-blur-lg transition-all focus:top-4"
+>
+  本文へ移動
+</a>
+
+<header
+  class="app-layout flex flex-col items-center justify-between sm:flex-row"
+>
+  <div
+    class="border-border bg-background relative flex w-full items-baseline justify-between border-b py-4 sm:items-center sm:py-6"
+  >
+    <a
+      href={getRelativeLocaleUrl(locale, "")}
+      class="hover:text-accent absolute px-2 py-1 leading-8 font-medium whitespace-nowrap sm:static sm:my-auto sm:leading-none"
+    >
+      Home
+    </a>
+    <nav
+      id="nav-menu"
+      class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
+    >
+      <button
+        id="menu-btn"
+        class="focus-outline self-end p-2 sm:hidden"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+        aria-controls="menu-items"
+        data-label-open="メニューを開く"
+        data-label-close="メニューを閉じる"
+      >
+        <IconX id="close-icon" class="hidden" />
+        <IconMenuDeep id="menu-icon" />
+      </button>
+      <ul
+        id="menu-items"
+        class="[&>li>a]:hover:text-accent mt-4 hidden w-44 grid-cols-2 place-content-center gap-2 sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0 sm:[&>li]:h-8 [&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:font-medium sm:[&>li>a]:px-2 sm:[&>li>a]:py-1"
+      >
+        {
+          navItems.map(item => (
+            <li class="col-span-2">
+              <a
+                href={getRelativeLocaleUrl(locale, item.href)}
+                class:list={{ "active-nav": isActive(item.path) }}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        {
+          features.lightAndDarkMode && (
+            <li class="col-span-1 flex items-center justify-center">
+              <button
+                id="theme-btn"
+                class="focus-outline hover:[&>svg]:stroke-accent relative size-12 p-4 sm:size-8"
+                title="テーマを切り替える"
+                aria-label="auto"
+                aria-live="polite"
+              >
+                <IconMoon class="absolute top-[50%] left-[50%] translate-[-50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+                <IconSunHigh class="absolute top-[50%] left-[50%] translate-[-50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+              </button>
+            </li>
+          )
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  function toggleNav() {
+    const menuBtn = document.querySelector<HTMLButtonElement>("#menu-btn");
+    const menuItems = document.querySelector("#menu-items");
+    const menuIcon = document.querySelector("#menu-icon");
+    const closeIcon = document.querySelector("#close-icon");
+
+    if (!menuBtn || !menuItems || !menuIcon || !closeIcon) return;
+
+    const openLabel = menuBtn.dataset.labelOpen ?? "メニューを開く";
+    const closeLabel = menuBtn.dataset.labelClose ?? "メニューを閉じる";
+
+    menuBtn.addEventListener("click", () => {
+      const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
+
+      menuBtn.setAttribute("aria-expanded", openMenu ? "false" : "true");
+      menuBtn.setAttribute("aria-label", openMenu ? openLabel : closeLabel);
+
+      menuItems.classList.toggle("hidden");
+      menuItems.classList.toggle("grid");
+      menuIcon.classList.toggle("hidden");
+      closeIcon.classList.toggle("hidden");
+    });
+  }
+
+  toggleNav();
+
+  document.addEventListener("astro:after-swap", toggleNav);
+</script>
